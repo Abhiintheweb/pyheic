@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyheic"
+version = "0.1.0"
+description = "Convert HEIC images to JPEG from Python or the command line."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Abhishek" }
+]
+dependencies = [
+  "pillow>=10.0.0",
+  "pillow-heif>=0.16.0"
+]
+keywords = ["heic", "jpeg", "image", "conversion", "cli"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Multimedia :: Graphics :: Graphics Conversion"
+]
+
+[project.scripts]
+heic2jpeg = "pyheic_converter.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
