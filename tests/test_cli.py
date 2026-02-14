@@ -18,11 +18,11 @@ if "pillow_heif" not in sys.modules:
     pillow_heif_module.register_heif_opener = lambda: None
     sys.modules["pillow_heif"] = pillow_heif_module
 
-from pyheic_converter.cli import main
+from pyheic.cli import main
 
 
 class CliTests(unittest.TestCase):
-    @patch("pyheic_converter.cli.convert_heic_to_jpeg")
+    @patch("pyheic.cli.convert_heic_to_jpeg")
     def test_main_success(self, convert_mock) -> None:
         convert_mock.return_value = Path("output.jpg")
         stdout = io.StringIO()
@@ -36,7 +36,7 @@ class CliTests(unittest.TestCase):
         convert_mock.assert_called_once_with(Path("input.heic"), None, quality=95)
         self.assertIn("Created: output.jpg", stdout.getvalue())
 
-    @patch("pyheic_converter.cli.convert_heic_to_jpeg")
+    @patch("pyheic.cli.convert_heic_to_jpeg")
     def test_main_error(self, convert_mock) -> None:
         convert_mock.side_effect = ValueError("bad input")
         stderr = io.StringIO()
