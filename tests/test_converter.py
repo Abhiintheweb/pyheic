@@ -18,7 +18,7 @@ if "pillow_heif" not in sys.modules:
     pillow_heif_module.register_heif_opener = lambda: None
     sys.modules["pillow_heif"] = pillow_heif_module
 
-from pyheic_converter.converter import convert_heic_to_jpeg
+from pyheic.converter import convert_heic_to_jpeg
 
 
 class ConvertHeicToJpegTests(unittest.TestCase):
@@ -45,7 +45,7 @@ class ConvertHeicToJpegTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 convert_heic_to_jpeg(path, quality=100)
 
-    @patch("pyheic_converter.converter.Image.open")
+    @patch("pyheic.converter.Image.open")
     def test_converts_with_default_output_path(self, open_mock: MagicMock) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             src = Path(tmpdir) / "image.heic"
@@ -62,7 +62,7 @@ class ConvertHeicToJpegTests(unittest.TestCase):
                 src.with_suffix(".jpg"), format="JPEG", quality=90, optimize=True
             )
 
-    @patch("pyheic_converter.converter.Image.open")
+    @patch("pyheic.converter.Image.open")
     def test_converts_alpha_mode_to_rgb(self, open_mock: MagicMock) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             src = Path(tmpdir) / "image.heif"
